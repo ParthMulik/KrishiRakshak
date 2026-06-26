@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KrishiRakshak AI - Farm Decision Intelligence</title>
+    <title>KrishiRakshak - Farm Decision Intelligence</title>
     
     <!-- Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -129,8 +129,8 @@
         /* Buttons */
         .btn {
             display: inline-block;
-            padding: 16px 32px;
-            font-size: 1.2rem;
+            padding: 14px 28px;
+            font-size: 1.1rem;
             font-weight: 700;
             border-radius: 12px;
             border: none;
@@ -144,6 +144,67 @@
         .btn-accent { background-color: var(--accent-orange); color: white; }
         .btn-outline { background-color: transparent; border: 2px solid var(--primary-green); color: var(--primary-green); }
         [data-theme="dark"] .btn-outline { border-color: var(--light-green); color: var(--light-green); }
+
+        /* Scroll To Top Button (Sleek SVG) */
+        #scrollTopBtn {
+            display: none; 
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            z-index: 99; 
+            border: none; 
+            outline: none; 
+            background-color: var(--primary-green); 
+            color: white; 
+            cursor: pointer; 
+            padding: 12px; 
+            border-radius: 50%; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #scrollTopBtn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        #scrollTopBtn:hover {
+            background-color: var(--light-green);
+            transform: translateY(-3px);
+        }
+
+        /* In-App Notification (Toast) */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1001;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid var(--primary-green);
+            font-weight: 600;
+        }
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
 
         /* Hero Styles */
         .hero-section {
@@ -162,9 +223,9 @@
             border-radius: 50px; font-size: 1.1rem; font-weight: 700; margin-bottom: 25px; border: 2px solid var(--light-green);
         }
         [data-theme="dark"] .hero-badge { background-color: rgba(102, 187, 106, 0.1); color: var(--light-green); }
-        .hero-title { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; color: var(--primary-green); }
+        .hero-title { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; color: var(--primary-green); }
         [data-theme="dark"] .hero-title { color: var(--light-green); }
-        .hero-subtitle { font-size: 1.4rem; margin-bottom: 20px; color: var(--text-muted); }
+        .hero-subtitle { font-size: 1.2rem; margin-bottom: 20px; color: var(--text-muted); }
         .hero-features { list-style: none; margin-bottom: 35px; padding: 0; font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
         .hero-features li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
         .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
@@ -177,6 +238,19 @@
         /* Grids */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md); width: 100%; }
         .dashboard-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: var(--spacing-md); width: 100%; }
+        
+        /* Optimized Market Grid */
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            width: 100%;
+        }
+        .market-grid .card { padding: 15px; }
+        .market-grid h2 { font-size: 1.8rem; margin-bottom: 2px; }
+        .market-grid h3 { font-size: 1.1rem; }
+        .market-grid .card-icon { font-size: 1.8rem; margin-bottom: 2px; }
+
         .card { background-color: var(--card-bg); padding: var(--spacing-lg); border-radius: var(--border-radius); box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: center; }
         .card:hover { transform: translateY(-3px); }
         .card-icon { font-size: 3rem; margin-bottom: 10px; }
@@ -190,19 +264,23 @@
         .global-location-box { display: flex; align-items: center; background: var(--card-bg); padding: 10px 20px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 2px solid var(--primary-green); }
         .global-location-box input { border: none; background: transparent; font-size: 1.1rem; color: var(--text-main); outline: none; width: 180px; font-weight: 600; }
 
+        /* General Inputs */
+        .loc-input { flex: 1; padding: 12px; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc; width: 100%; }
+
         /* AI Advisor Chat */
-        .chat-box { background: var(--card-bg); border-radius: var(--border-radius); height: 450px; width: 100%; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; }
+        .chat-box { background: var(--card-bg); border-radius: var(--border-radius); height: 460px; width: 100%; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; }
         .chat-history { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .msg { max-width: 80%; padding: 15px; border-radius: 12px; font-size: 1.1rem; }
         .msg.ai { background-color: var(--bg-color); align-self: flex-start; border: 1px solid #ccc; }
         .msg.user { background-color: var(--light-green); color: white; align-self: flex-end; }
-        .suggest-btns { padding: 0 15px; display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; margin-bottom: 10px; scrollbar-width: none; }
+        .suggest-btns { padding: 8px 15px; display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; margin-bottom: 5px; scrollbar-width: none; border-top: 1px solid rgba(0,0,0,0.05); }
         .suggest-btns::-webkit-scrollbar { display: none; }
         .chat-input { display: flex; padding: 15px; background: var(--card-bg); border-top: 1px solid #ccc; gap: 10px; }
         .chat-input input { flex: 1; padding: 15px; font-size: 1.1rem; border-radius: 8px; border: 1px solid #ccc; }
 
         /* Maps */
         #map { width: 100%; height: 100%; min-height: 400px; border-radius: var(--border-radius); z-index: 1; }
+        .custom-map-icon { background: var(--card-bg); border: 2px solid var(--primary-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
 
         /* Utility */
         .text-center { text-align: center; }
@@ -215,7 +293,7 @@
         /* Mobile Adjustments */
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
-            .hero-title { font-size: 2.5rem; }
+            .hero-title { font-size: 2.2rem; }
             .nav-links { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--primary-green); padding: 15px; overflow-x: auto; box-shadow: 0 -4px 10px rgba(0,0,0,0.2); z-index: 1000; }
             section { padding: 100px 20px 80px; }
             .action-card { padding: 25px; font-size: 1.1rem; }
@@ -228,11 +306,12 @@
             .hero-blob { width: 300px; height: 300px; }
             .dashboard-grid { grid-template-columns: 1fr; }
             .global-location-box { width: 100%; justify-content: center; }
+            #scrollTopBtn { bottom: 80px; right: 20px; padding: 12px; font-size: 1.2rem; } /* Above mobile nav */
         }
         @media (min-width: 769px) and (max-width: 1024px) {
             .dashboard-grid { grid-template-columns: 1fr 1fr; }
             .action-card { grid-column: span 2; }
-            .hero-title { font-size: 3rem; }
+            .hero-title { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -240,17 +319,16 @@
 
     <!-- Navigation Bar -->
     <nav>
-        <a href="#" class="logo">🌱 <span data-i18n="logo">KrishiRakshak AI</span></a>
-        
+        <a href="#" class="logo">🌱 <span data-i18n="logo">KrishiRakshak</span></a>
         <div class="nav-links">
             <a href="#dashboard" data-i18n="nav_dashboard">Dashboard</a>
             <a href="#ai-advisor" data-i18n="nav_ai">AI Advisor</a>
             <a href="#agricircle" data-i18n="nav_community">AgriCircle</a>
             <a href="#market-prices" data-i18n="nav_market">Market Prices</a>
+            <a href="#farm-log" data-i18n="nav_log">Logbook</a>
             <a href="#crop-health" data-i18n="nav_crop">Crop Health</a>
             <a href="#schemes" data-i18n="nav_schemes">Schemes</a>
         </div>
-
         <div style="display: flex; gap: 10px;">
             <select id="lang-switcher" onchange="changeLanguage(this.value)">
                 <option value="en">🇮🇳 English</option>
@@ -261,12 +339,20 @@
         </div>
     </nav>
 
+    <!-- Scroll to Top Button (Sleek) -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19V7.83l4.88 4.88c.39.39 1.03.39 1.42 0 .39-.39.39-1.02 0-1.41l-6.59-6.59a.996.996 0 0 0-1.41 0l-6.6 6.58c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L11 7.83V19c0 .55.45 1 1 1s1-.45 1-1z"/></svg>
+    </button>
+
+    <!-- In-App Notification (Toast) -->
+    <div id="toast">Booking Confirmed!</div>
+
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="hero-content">
-            <span class="hero-badge" data-i18n="hero_badge">✨ Smart Farming Made Simple</span>
-            <h1 data-i18n="hero_title" class="hero-title">Every Day Matters</h1>
-            <p data-i18n="hero_subtitle" class="hero-subtitle">AI tells you exactly what to do on your farm today based on local real-time data.</p>
+            <span class="hero-badge" data-i18n="hero_badge">✨ Revolutionizing Agriculture</span>
+            <h1 data-i18n="hero_title" class="hero-title">Elevating Farming Standards</h1>
+            <p data-i18n="hero_subtitle" class="hero-subtitle">Experience the next generation of agriculture with data-driven insights and real-time precision.</p>
             
             <ul class="hero-features">
                 <li><span data-i18n="hero_feat_1">🎯 Real-time Weather & Risk Alerts</span></li>
@@ -287,11 +373,10 @@
         </div>
     </section>
 
-    <!-- Dashboard -->
+    <!-- Dashboard & Dynamically Adjusted Location Plan -->
     <section id="dashboard">
-        <!-- Centralized Global Location Bar -->
         <div class="flex-between" style="flex-wrap: wrap; gap: 15px; margin-bottom: 25px; align-items: center;">
-            <h2 data-i18n="greeting" style="margin: 0;">Good Morning, Farmer 🌾</h2>
+            <h2 data-i18n="greeting" style="margin: 0;">Namaste, Farmer 🌾</h2>
             <div class="global-location-box">
                 <span style="font-size: 1.3rem; margin-right: 8px;">📍</span>
                 <input type="text" id="global-location-input" data-i18n-placeholder="loc_placeholder" placeholder="Enter City/Village" onchange="updateGlobalLocation(this.value)">
@@ -301,14 +386,14 @@
         <div class="dashboard-grid">
             <div class="card action-card">
                 <h3 data-i18n="action_title">Today's Action Plan</h3>
-                <ul class="action-list">
-                    <li>✅ <span data-i18n="action_1">Irrigate at 6 AM</span></li>
-                    <li>❌ <span data-i18n="action_2">Do not spray pesticide today (Rain expected)</span></li>
-                    <li>⚠️ <span data-i18n="action_3">Harvest tomatoes before evening</span></li>
-                    <li>💧 <span data-i18n="action_4">Save approx 1800 liters of water today</span></li>
+                <ul class="action-list" id="dynamic-action-list">
+                    <!-- Updated live by Javascript based on location metrics -->
+                    <li>✅ Irrigate at 6 AM</li>
+                    <li>❌ Do not spray pesticide today (Rain expected)</li>
+                    <li>⚠️ Complete pending tasks early</li>
                 </ul>
                 <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: inline-block;">
-                    <strong data-i18n="est_savings">Estimated Savings:</strong> <span data-i18n="est_amount">₹1850</span>
+                    <strong data-i18n="est_savings">Estimated Savings:</strong> <span>₹1,850</span>
                 </div>
             </div>
 
@@ -343,13 +428,17 @@
         
         <div class="chat-box">
             <div class="chat-history" id="chat-history">
-                <div class="msg ai" id="welcome-msg" data-i18n="ai_greeting">Hello! I am KrishiRakshak AI. How can I help your farm today?</div>
+                <div class="msg ai" id="welcome-msg" data-i18n="ai_greeting">Hello! I am KrishiRakshak. How can I help your farm today?</div>
             </div>
             
             <div class="suggest-btns">
-                <button class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;" onclick="sendMockSuggestion('btn_irrigate')">💧 <span data-i18n="btn_irrigate">Irrigate?</span></button>
-                <button class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;" onclick="sendMockSuggestion('btn_pesticide')">🛡️ <span data-i18n="btn_pesticide">Spray Pesticide?</span></button>
-                <button class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;" onclick="sendMockSuggestion('btn_tractor')">🚜 <span data-i18n="btn_tractor">Find Tractor</span></button>
+                <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.85rem;" onclick="sendMockSuggestion('btn_irrigate')">💧 <span data-i18n="btn_irrigate">Irrigate?</span></button>
+                <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.85rem;" onclick="sendMockSuggestion('btn_pesticide')">🛡️ <span data-i18n="btn_pesticide">Spray Pesticide?</span></button>
+                <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.85rem;" onclick="sendMockSuggestion('btn_tractor')">🚜 <span data-i18n="btn_tractor">Find Tractor</span></button>
+                <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.85rem;" onclick="sendMockSuggestion('btn_rice_fert')">🌾 <span data-i18n="btn_rice_fert">Rice Fertilizer?</span></button>
+                <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.85rem;" onclick="sendMockSuggestion('btn_kisan_status')">💳 <span data-i18n="btn_kisan_status">PM-Kisan Status?</span></button>
+                <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.85rem;" onclick="sendMockSuggestion('btn_forecast_5')">📅 <span data-i18n="btn_forecast_5">5-Day Forecast</span></button>
+                <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.85rem;" onclick="sendMockSuggestion('btn_organic_pest')">🌿 <span data-i18n="btn_organic_pest">Organic Control</span></button>
             </div>
 
             <div class="chat-input">
@@ -360,7 +449,7 @@
         </div>
     </section>
 
-    <!-- AgriCircle Marketplace (Moved Here) -->
+    <!-- AgriCircle Marketplace -->
     <section id="agricircle">
         <h2 data-i18n="community_title">AgriCircle (Community Sharing)</h2>
         <p data-i18n="community_subtitle" style="margin-bottom: 20px;">Rent tractors, find labour, or share resources with nearby farmers.</p>
@@ -372,11 +461,12 @@
             <button class="btn btn-outline comm-btn" data-type="storage" onclick="filterCommunity('storage', this)"><span data-i18n="comm_storage">❄️ Cold Storage</span></button>
             <button class="btn btn-outline comm-btn" data-type="vendor" onclick="filterCommunity('vendor', this)"><span data-i18n="comm_vendors">🏪 Vendors</span></button>
             <button class="btn btn-outline comm-btn" data-type="fertilizer" onclick="filterCommunity('fertilizer', this)"><span data-i18n="comm_fertilizers">🌱 Fertilizers</span></button>
+            <button class="btn btn-outline comm-btn" data-type="market" onclick="filterCommunity('market', this)"><span data-i18n="comm_markets">🏬 Markets</span></button>
         </div>
 
         <div class="grid">
             <div id="community-card-container">
-                <!-- Javascript will inject the card here -->
+                <!-- Injected via JS -->
             </div>
             <div class="card" style="padding: 0; overflow: hidden; grid-column: span 2 / auto; position: relative;">
                 <div id="map"></div>
@@ -384,7 +474,7 @@
         </div>
     </section>
 
-    <!-- Market Prices -->
+    <!-- Market Prices Section (Now 10 Items Natively Styled) -->
     <section id="market-prices">
         <div class="flex-between" style="margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
             <h2 data-i18n="market_title" style="margin: 0;">Live Market Prices</h2>
@@ -394,38 +484,105 @@
         </div>
         <p data-i18n="market_subtitle" style="margin-bottom: 30px;">Daily updated crop prices in your local market.</p>
         
-        <div class="grid">
+        <div class="market-grid">
             <div class="card">
-                <div class="flex-between">
-                    <div class="card-icon">🌾</div>
-                    <span style="color: var(--primary-green); font-weight: bold;">+₹50 ▲</span>
-                </div>
+                <div class="flex-between"><div class="card-icon">🌾</div><span style="color: var(--primary-green); font-weight: bold; font-size: 0.85rem;">+₹50 ▲</span></div>
                 <h3 data-i18n="crop_wheat">Wheat</h3>
-                <h2 style="color: var(--primary-green); font-size: 2.5rem;">₹2,275</h2>
-                <p data-i18n="price_quintal" style="color: var(--text-muted);">per Quintal</p>
+                <h2 style="color: var(--primary-green);">₹2,275</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
             </div>
             <div class="card">
-                <div class="flex-between">
-                    <div class="card-icon">🧅</div>
-                    <span style="color: var(--error-red); font-weight: bold;">-₹20 ▼</span>
-                </div>
+                <div class="flex-between"><div class="card-icon">🧅</div><span style="color: var(--error-red); font-weight: bold; font-size: 0.85rem;">-₹20 ▼</span></div>
                 <h3 data-i18n="crop_onion">Onion</h3>
-                <h2 style="color: var(--primary-green); font-size: 2.5rem;">₹1,800</h2>
-                <p data-i18n="price_quintal" style="color: var(--text-muted);">per Quintal</p>
+                <h2 style="color: var(--primary-green);">₹1,800</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
             </div>
             <div class="card">
-                <div class="flex-between">
-                    <div class="card-icon">🍅</div>
-                    <span style="color: var(--primary-green); font-weight: bold;">+₹100 ▲</span>
-                </div>
+                <div class="flex-between"><div class="card-icon">🍅</div><span style="color: var(--primary-green); font-weight: bold; font-size: 0.85rem;">+₹100 ▲</span></div>
                 <h3 data-i18n="crop_tomato">Tomato</h3>
-                <h2 style="color: var(--primary-green); font-size: 2.5rem;">₹3,500</h2>
-                <p data-i18n="price_quintal" style="color: var(--text-muted);">per Quintal</p>
+                <h2 style="color: var(--primary-green);">₹3,500</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
+            </div>
+            <div class="card">
+                <div class="flex-between"><div class="card-icon">🫘</div><span style="color: var(--primary-green); font-weight: bold; font-size: 0.85rem;">+₹80 ▲</span></div>
+                <h3 data-i18n="crop_soybean">Soybean</h3>
+                <h2 style="color: var(--primary-green);">₹4,500</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
+            </div>
+            <div class="card">
+                <div class="flex-between"><div class="card-icon">☁️</div><span style="color: var(--error-red); font-weight: bold; font-size: 0.85rem;">-₹150 ▼</span></div>
+                <h3 data-i18n="crop_cotton">Cotton</h3>
+                <h2 style="color: var(--primary-green);">₹7,200</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
+            </div>
+            <div class="card">
+                <div class="flex-between"><div class="card-icon">🎋</div><span style="color: var(--primary-green); font-weight: bold; font-size: 0.85rem;">+₹10 ▲</span></div>
+                <h3 data-i18n="crop_sugarcane">Sugarcane</h3>
+                <h2 style="color: var(--primary-green);">₹3,100</h2>
+                <p data-i18n="price_ton" style="color: var(--text-muted); font-size: 0.85rem;">per Ton</p>
+            </div>
+            <!-- 4 Brand New Crops -->
+            <div class="card">
+                <div class="flex-between"><div class="card-icon">🍚</div><span style="color: var(--primary-green); font-weight: bold; font-size: 0.85rem;">+₹65 ▲</span></div>
+                <h3 data-i18n="crop_rice">Rice (Paddy)</h3>
+                <h2 style="color: var(--primary-green);">₹2,180</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
+            </div>
+            <div class="card">
+                <div class="flex-between"><div class="card-icon">🌽</div><span style="color: var(--primary-green); font-weight: bold; font-size: 0.85rem;">+₹30 ▲</span></div>
+                <h3 data-i18n="crop_maize">Maize</h3>
+                <h2 style="color: var(--primary-green);">₹1,960</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
+            </div>
+            <div class="card">
+                <div class="flex-between"><div class="card-icon">🥜</div><span style="color: var(--error-red); font-weight: bold; font-size: 0.85rem;">-₹40 ▼</span></div>
+                <h3 data-i18n="crop_groundnut">Groundnut</h3>
+                <h2 style="color: var(--primary-green);">₹6,300</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
+            </div>
+            <div class="card">
+                <div class="flex-between"><div class="card-icon">🟡</div><span style="color: var(--primary-green); font-weight: bold; font-size: 0.85rem;">+₹110 ▲</span></div>
+                <h3 data-i18n="crop_mustard">Mustard</h3>
+                <h2 style="color: var(--primary-green);">₹5,450</h2>
+                <p data-i18n="price_quintal" style="color: var(--text-muted); font-size: 0.85rem;">per Quintal</p>
             </div>
         </div>
     </section>
 
-    <!-- Crop Health & Pest (Moved Here) -->
+    <!-- Farm Logbook -->
+    <section id="farm-log">
+        <div class="flex-between" style="flex-wrap: wrap; gap: 15px; margin-bottom: 25px; align-items: center;">
+            <h2 data-i18n="log_title" style="margin: 0;">My Farm Logbook</h2>
+            <div style="background: var(--card-bg); padding: 8px 20px; border-radius: 50px; font-weight: bold; border: 2px solid var(--primary-green); font-size: 1.2rem;">
+                <span data-i18n="log_total_invest">Total Investment:</span> <span style="color: var(--error-red);">₹<span id="log-total-cost">0</span></span>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="card" style="justify-content: flex-start;">
+                <h3 data-i18n="log_add_task" style="margin-bottom: 15px;">Add New Task</h3>
+                <select id="log-category" class="loc-input" style="margin-bottom: 15px; background: var(--bg-color);">
+                    <option value="Sowing" data-i18n="log_cat_sowing">🌱 Sowing</option>
+                    <option value="Fertilizer" data-i18n="log_cat_fert">🌿 Fertilizer</option>
+                    <option value="Pesticide" data-i18n="log_cat_pest">🛡️ Pesticide</option>
+                    <option value="Labor" data-i18n="log_cat_labor">👨‍🌾 Labor</option>
+                    <option value="Irrigation" data-i18n="log_cat_irrigation">💧 Irrigation</option>
+                    <option value="Harvesting" data-i18n="log_cat_harvest">🌾 Harvesting</option>
+                </select>
+                <input type="number" id="log-cost" class="loc-input" data-i18n-placeholder="log_cost_ph" placeholder="Cost (₹)" style="margin-bottom: 15px;">
+                <input type="text" id="log-note" class="loc-input" data-i18n-placeholder="log_note_ph" placeholder="Note (Optional)" style="margin-bottom: 20px;">
+                <button class="btn btn-primary" data-i18n="btn_save_log" onclick="saveLog()" style="width: 100%;">Save Task</button>
+            </div>
+            <div class="card" style="justify-content: flex-start;">
+                <div class="flex-between" style="margin-bottom: 15px;">
+                    <h3 data-i18n="log_history">Recent Activity</h3>
+                    <button class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;" onclick="downloadExcel()" data-i18n="btn_download">📥 Download Excel</button>
+                </div>
+                <ul id="log-history-list" style="list-style: none; padding: 0; max-height: 250px; overflow-y: auto;"></ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crop Health & Dynamic Pest Prediction -->
     <section id="crop-health">
         <div class="grid">
             <div class="card">
@@ -447,15 +604,18 @@
                 <h2 data-i18n="pest_title">Pest Prediction</h2>
                 <div style="background: var(--bg-color); padding: 20px; border-radius: var(--border-radius);">
                     <div class="flex-between" style="margin-bottom: 15px;">
-                        <h3 data-i18n="pest_whitefly">Whitefly Risk</h3>
-                        <span class="badge" style="font-size: 1.2rem;" data-i18n="risk_high">High ⚠</span>
+                        <!-- Dynamically replaced via JS -->
+                        <h3 id="pest-name" data-i18n="pest_low_risk">General Pest Risk</h3>
+                        <span id="main-pest-badge" class="badge badge-green" style="font-size: 1.2rem;" data-i18n="risk_low">Low</span>
                     </div>
                     <p><strong data-i18n="pest_factors">Weather Factors triggering risk:</strong></p>
                     <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li><span data-i18n="pest_hum">High Humidity (65%)</span></li>
-                        <li><span data-i18n="pest_temp">Warm Temperature (32°C)</span></li>
+                        <!-- Dynamically replaced via JS -->
+                        <li><span id="pest-factor-1" data-i18n="factor_opt_hum">Optimal Humidity</span></li>
+                        <li><span id="pest-factor-2" data-i18n="factor_opt_temp">Favorable Temperature</span></li>
                     </ul>
-                    <button class="btn btn-primary mt-2" style="width: 100%;" data-i18n="pest_btn">View Preventive Action</button>
+                    <button class="btn btn-primary mt-2" style="width: 100%;" data-i18n="pest_btn" onclick="showPestPreventiveMeasures()">View Preventive Action</button>
+                    <div id="pest-measures-display" style="display: none; margin-top: 15px; padding: 15px; background: var(--card-bg); border-radius: 8px; border-left: 4px solid var(--primary-green); font-size: 0.95rem; font-weight: 600;"></div>
                 </div>
             </div>
         </div>
@@ -464,7 +624,6 @@
     <!-- Govt Schemes -->
     <section id="schemes">
         <h2 data-i18n="schemes_title" style="margin-bottom: 20px;">Govt Schemes</h2>
-        
         <div class="grid">
             <div class="card">
                 <h3 data-i18n="sch1_title">PM-Kisan Samman Nidhi</h3>
@@ -472,31 +631,26 @@
                 <p><strong data-i18n="scheme_status">Status:</strong> <span data-i18n="scheme_eligible">Eligible</span></p>
                 <a href="https://pmkisan.gov.in/" target="_blank" class="btn btn-outline mt-2" style="padding: 10px; display: block;" data-i18n="scheme_apply">Apply Now</a>
             </div>
-            
             <div class="card">
                 <h3 data-i18n="sch2_title">Pradhan Mantri Fasal Bima Yojana</h3>
                 <p style="margin-bottom: 10px;"><strong data-i18n="scheme_benefit">Benefit:</strong> <span data-i18n="sch2_desc">Crop Insurance against natural failure</span></p>
                 <a href="https://pmfby.gov.in/" target="_blank" class="btn btn-outline mt-2" style="padding: 10px; display: block;" data-i18n="scheme_view">View Details</a>
             </div>
-
             <div class="card">
                 <h3 data-i18n="sch3_title">PM Krishi Sinchayee Yojana</h3>
                 <p style="margin-bottom: 10px;"><strong data-i18n="scheme_benefit">Benefit:</strong> <span data-i18n="sch3_desc">Subsidy for drip & sprinkler irrigation</span></p>
                 <a href="https://pmksy.gov.in/" target="_blank" class="btn btn-outline mt-2" style="padding: 10px; display: block;" data-i18n="scheme_view">View Details</a>
             </div>
-
             <div class="card">
                 <h3 data-i18n="sch4_title">PM Kisan Maandhan Yojana</h3>
                 <p style="margin-bottom: 10px;"><strong data-i18n="scheme_benefit">Benefit:</strong> <span data-i18n="sch4_desc">₹3,000 monthly pension after age 60</span></p>
                 <a href="https://maandhan.in/" target="_blank" class="btn btn-outline mt-2" style="padding: 10px; display: block;" data-i18n="scheme_apply">Apply Now</a>
             </div>
-            
             <div class="card">
                 <h3 data-i18n="sch5_title">Soil Health Card Scheme</h3>
                 <p style="margin-bottom: 10px;"><strong data-i18n="scheme_benefit">Benefit:</strong> <span data-i18n="sch5_desc">Crop-wise fertilizer recommendations</span></p>
                 <a href="https://soilhealth.dac.gov.in/" target="_blank" class="btn btn-outline mt-2" style="padding: 10px; display: block;" data-i18n="scheme_view">View Details</a>
             </div>
-
             <div class="card">
                 <h3 data-i18n="sch6_title">PM-KUSUM Yojana</h3>
                 <p style="margin-bottom: 10px;"><strong data-i18n="scheme_benefit">Benefit:</strong> <span data-i18n="sch6_desc">Subsidy on solar water pumps</span></p>
@@ -507,106 +661,148 @@
 
     <!-- Footer -->
     <footer style="background: var(--primary-green); color: white; padding: 40px 20px; text-align: center;">
-        <h2>🌱 <span data-i18n="logo">KrishiRakshak AI</span></h2>
+        <h2>🌱 <span data-i18n="logo">KrishiRakshak</span></h2>
         <p style="margin: 20px 0;"><span data-i18n="footer_help">Agriculture Helpline:</span> <strong>1551</strong> | <span data-i18n="footer_emg">Emergency:</span> <strong>112</strong></p>
         <p data-i18n="footer_offline">Offline Mode Ready. Your data is synced securely.</p>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Leaflet Engine Script -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
         let currentLang = 'en';
+        let farmLogs = JSON.parse(localStorage.getItem('krishi_farm_logs')) || [];
+        let currentPestKey = 'pest_low_risk'; // Tracks the current pest for preventive measures
 
-        // --- ENTIRE WEBSITE TRANSLATION DICTIONARY ---
-        // Rule for future: If you add new text to HTML, wrap it in a tag (e.g. <span>), add data-i18n="your_key", and add the translation here!
+        // Scroll to Top Logic
+        window.onscroll = function() {
+            const btn = document.getElementById("scrollTopBtn");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // --- EXTENDED TRANSLATION DICTIONARY ---
         const translations = {
             en: {
-                logo: "KrishiRakshak AI", nav_dashboard: "Dashboard", nav_ai: "AI Advisor", nav_community: "AgriCircle", nav_market: "Market Prices", nav_crop: "Crop Health", nav_schemes: "Schemes",
-                hero_badge: "✨ Smart Farming Made Simple", hero_title: "Every Day Matters", hero_subtitle: "AI tells you exactly what to do on your farm today based on local real-time data.",
+                logo: "KrishiRakshak", nav_dashboard: "Dashboard", nav_ai: "AI Advisor", nav_community: "AgriCircle", nav_market: "Market Prices", nav_log: "Logbook", nav_crop: "Crop Health", nav_schemes: "Schemes",
+                hero_badge: "✨ Revolutionizing Agriculture", hero_title: "Elevating Farming Standards", hero_subtitle: "Experience the next generation of agriculture with data-driven insights and real-time precision.",
                 hero_feat_1: "🎯 Real-time Weather & Risk Alerts", hero_feat_2: "📸 AI Crop Disease Scanner", hero_feat_3: "📊 Live Mandi Prices",
-                btn_get_started: "Get Started", btn_ask_ai: "Ask AI",
-                greeting: "Good Morning, Farmer 🌾", loc_placeholder: "Enter City/Village",
-                action_title: "Today's Action Plan", action_1: "Irrigate at 6 AM", action_2: "Do not spray pesticide today (Rain expected)", action_3: "Harvest tomatoes before evening", action_4: "Save approx 1800 liters of water today", est_savings: "Estimated Savings:", est_amount: "₹1850",
+                btn_get_started: "Get Started", btn_ask_ai: "Ask AI", greeting: "Namaste, Farmer 🌾", loc_placeholder: "Enter City/Village",
+                action_title: "Today's Action Plan", est_savings: "Estimated Savings:",
                 weather_title: "Today's Weather", weather_loc: "Location:", weather_temp: "Temp:", weather_rain: "Rain Chance:", weather_wind: "Wind:",
                 risk_title: "Risk Alerts", risk_based_on: "Based on", risk_data: "data", risk_flood: "Flood / Rain Risk", risk_heat: "Heat Risk", risk_pest: "Pest Risk", risk_low: "Low", risk_medium: "Medium", risk_high: "High ⚠",
-                ai_title: "AI Advisor", ai_subtitle: "Ask anything about your farm. I can talk! Make sure your device volume is up.", ai_greeting: "Hello! I am KrishiRakshak AI. How can I help your farm today?",
-                btn_irrigate: "Irrigate?", btn_pesticide: "Spray Pesticide?", btn_tractor: "Find Tractor", chat_placeholder: "Ask a question...", btn_send: "Send",
+                ai_title: "AI Advisor", ai_subtitle: "Ask anything about your farm. I can talk! Make sure your device volume is up.", ai_greeting: "Hello! I am KrishiRakshak. How can I help your farm today?",
+                btn_irrigate: "Irrigate?", btn_pesticide: "Spray Pesticide?", btn_tractor: "Find Tractor",
+                btn_rice_fert: "Rice Fertilizer?", btn_kisan_status: "PM-Kisan Status?", btn_forecast_5: "5-Day Forecast", btn_organic_pest: "Organic Control",
+                chat_placeholder: "Ask a question...", btn_send: "Send",
                 community_title: "AgriCircle (Community Sharing)", community_subtitle: "Rent tractors, find labour, or share resources with nearby farmers.",
                 comm_tractors: "🚜 Tractors", comm_labour: "👨‍🌾 Labour", comm_pumps: "🚰 Pumps", comm_storage: "❄️ Cold Storage", comm_vendors: "🏪 Vendors", comm_fertilizers: "🌱 Fertilizers",
                 comm_owner: "Owner:", comm_dist: "Distance:", comm_info: "Info:", comm_book: "Book", comm_call: "📞 Call",
-                market_title: "Live Market Prices", market_mandi: "Mandi", market_subtitle: "Daily updated crop prices in your local market.", crop_wheat: "Wheat", crop_onion: "Onion", crop_tomato: "Tomato", price_quintal: "per Quintal",
+                comm_markets: "🏬 Markets",
+                market_title: "Live Market Prices", market_mandi: "Mandi", market_subtitle: "Daily updated crop prices in your local market.", 
+                crop_wheat: "Wheat", crop_onion: "Onion", crop_tomato: "Tomato", crop_soybean: "Soybean", crop_cotton: "Cotton", crop_sugarcane: "Sugarcane",
+                crop_rice: "Rice (Paddy)", crop_maize: "Maize", crop_groundnut: "Groundnut", crop_mustard: "Mustard",
+                price_quintal: "per Quintal", price_ton: "per Ton",
+                log_title: "My Farm Logbook", log_total_invest: "Total Investment:", log_add_task: "Add New Task", log_cat_sowing: "🌱 Sowing", log_cat_fert: "🌿 Fertilizer", log_cat_pest: "🛡️ Pesticide", log_cat_labor: "👨‍🌾 Labor", log_cat_irrigation: "💧 Irrigation", log_cat_harvest: "🌾 Harvesting", log_cost_ph: "Cost (₹)", log_note_ph: "Note (Optional)", btn_save_log: "Save Task", log_history: "Recent Activity", log_empty: "No tasks logged yet.", btn_download: "📥 Download Excel",
                 crop_title: "Crop Health Scanner", crop_subtitle: "Upload a photo of a sick plant, and AI will diagnose it instantly.", btn_upload: "Tap to Upload Image",
                 crop_res_title: "⚠ Leaf Blight Detected", crop_res_conf: "Confidence:", crop_res_treat: "Treatment:", crop_res_treat_val: "Apply Copper Fungicide (2g/Liter) in the evening.",
-                pest_title: "Pest Prediction", pest_whitefly: "Whitefly Risk", pest_factors: "Weather Factors triggering risk:", pest_hum: "High Humidity (65%)", pest_temp: "Warm Temperature (32°C)", pest_btn: "View Preventive Action",
+                pest_title: "Pest Prediction", pest_factors: "Weather Factors triggering risk:", pest_btn: "View Preventive Action",
+                pest_whitefly: "Whitefly Risk", pest_aphid: "Aphid & Thrips Risk", pest_low_risk: "General Pest Risk", 
+                measure_whitefly: "Use proper spacing. Spray Imidacloprid if infestation is severe. Install yellow sticky traps.", measure_aphid: "Spray 5% Neem Seed Kernel Extract (NSKE). Avoid excess nitrogen.", measure_low_risk: "Maintain field hygiene. Regular monitoring is sufficient.",
+                factor_hum_high: "High Humidity", factor_temp_warm: "Warm Temperature", factor_dry: "Dry Conditions", factor_temp_hot: "High Heat", factor_opt_hum: "Optimal Humidity", factor_opt_temp: "Favorable Temperature",
                 schemes_title: "Govt Schemes", scheme_benefit: "Benefit:", scheme_status: "Status:", scheme_eligible: "Eligible", scheme_apply: "Apply Now", scheme_view: "View Details",
                 sch1_title: "PM-Kisan Samman Nidhi", sch1_desc: "₹6,000 per year direct income support", sch2_title: "Pradhan Mantri Fasal Bima Yojana", sch2_desc: "Crop Insurance against natural failure", sch3_title: "PM Krishi Sinchayee Yojana", sch3_desc: "Subsidy for drip & sprinkler irrigation", sch4_title: "PM Kisan Maandhan Yojana", sch4_desc: "₹3,000 monthly pension after age 60", sch5_title: "Soil Health Card Scheme", sch5_desc: "Crop-wise fertilizer recommendations", sch6_title: "PM-KUSUM Yojana", sch6_desc: "Subsidy on solar water pumps",
                 footer_help: "Agriculture Helpline:", footer_emg: "Emergency:", footer_offline: "Offline Mode Ready. Your data is synced securely.",
-                // Community Data Injection Strings
                 c_t_title: "Mahindra 575 DI", c_t_own: "Ramesh Patil", c_t_dist: "2.5 km away", c_t_price: "₹800 / Hour",
                 c_l_title: "Harvesting Team (5 People)", c_l_own: "Suresh Kumar", c_l_dist: "4 km away", c_l_price: "₹400 / Day per person",
                 c_p_title: "5HP Submersible Pump", c_p_own: "Vinayak Deshmukh", c_p_dist: "1.2 km away", c_p_price: "₹300 / Day",
                 c_s_title: "Cold Storage Space", c_s_own: "AgroFresh Hub", c_s_dist: "12 km away", c_s_price: "₹1000 / Month",
                 c_v_title: "Kisan Krishi Kendra", c_v_own: "Anil Shinde", c_v_dist: "3.5 km away", c_v_price: "All Seeds & Tools Available",
-                c_f_title: "Organic Urea & NPK", c_f_own: "GreenFarm Suppliers", c_f_dist: "5 km away", c_f_price: "₹350 / 50kg Bag"
+                c_f_title: "Organic Urea & NPK", c_f_own: "GreenFarm Suppliers", c_f_dist: "5 km away", c_f_price: "₹350 / 50kg Bag",
+                c_m_title: "APMC Main Market", c_m_own: "Govt Mandi", c_m_dist: "8 km away", c_m_price: "Open 6 AM - 2 PM (Best rates today)"
             },
             hi: {
-                logo: "कृषिरक्षक AI", nav_dashboard: "डैशबोर्ड", nav_ai: "AI सलाहकार", nav_community: "कृषि-सर्कल", nav_market: "मंडी भाव", nav_crop: "फसल स्वास्थ्य", nav_schemes: "योजनाएं",
-                hero_badge: "✨ स्मार्ट खेती हुई आसान", hero_title: "हर दिन महत्वपूर्ण है", hero_subtitle: "AI स्थानीय डेटा के आधार पर आपको बताता है कि आज खेत में क्या करना है।",
+                logo: "कृषिरक्षक", nav_dashboard: "डैशबोर्ड", nav_ai: "AI सलाहकार", nav_community: "कृषि-सर्कल", nav_market: "मंडी भाव", nav_log: "लॉगबुक", nav_crop: "फसल स्वास्थ्य", nav_schemes: "योजनाएं",
+                hero_badge: "✨ कृषि में क्रांति", hero_title: "खेती के नए मानक", hero_subtitle: "डेटा-संचालित अंतर्दृष्टि और रीयल-टाइम सटीकता के साथ कृषि की अगली पीढ़ी का अनुभव करें।",
                 hero_feat_1: "🎯 रीयल-टाइम मौसम और जोखिम अलर्ट", hero_feat_2: "📸 AI फसल रोग स्कैनर", hero_feat_3: "📊 लाइव मंडी भाव",
-                btn_get_started: "शुरू करें", btn_ask_ai: "AI से पूछें",
-                greeting: "सुप्रभात, किसान 🌾", loc_placeholder: "शहर/गांव दर्ज करें",
-                action_title: "आज की कार्य योजना", action_1: "सुबह 6 बजे सिंचाई करें", action_2: "आज कीटनाशक का छिड़काव न करें (बारिश की संभावना)", action_3: "शाम से पहले टमाटर की कटाई करें", action_4: "आज लगभग 1800 लीटर पानी बचाएं", est_savings: "अनुमानित बचत:", est_amount: "₹1850",
+                btn_get_started: "शुरू करें", btn_ask_ai: "AI से पूछें", greeting: "नमस्ते, किसान 🌾", loc_placeholder: "शहर/गांव दर्ज करें",
+                action_title: "आज की कार्य योजना", est_savings: "अनुमानित बचत:",
                 weather_title: "आज का मौसम", weather_loc: "स्थान:", weather_temp: "तापमान:", weather_rain: "बारिश की संभावना:", weather_wind: "हवा:",
                 risk_title: "जोखिम अलर्ट", risk_based_on: "आधारित:", risk_data: "डेटा", risk_flood: "बाढ़ / बारिश का जोखिम", risk_heat: "गर्मी का जोखिम", risk_pest: "कीट का जोखिम", risk_low: "कम", risk_medium: "मध्यम", risk_high: "उच्च ⚠",
-                ai_title: "AI सलाहकार", ai_subtitle: "मैं बोल सकता हूँ! अपना वॉल्यूम बढ़ाएं और पूछें।", ai_greeting: "नमस्ते! मैं कृषिरक्षक AI हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?",
-                btn_irrigate: "सिंचाई?", btn_pesticide: "कीटनाशक?", btn_tractor: "ट्रैक्टर खोजें", chat_placeholder: "कोई प्रश्न पूछें...", btn_send: "भेजें",
+                ai_title: "AI सलाहकार", ai_subtitle: "मैं बोल सकता हूँ! अपना वॉल्यूम बढ़ाएं और पूछें।", ai_greeting: "नमस्ते! मैं कृषिरक्षक हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?",
+                btn_irrigate: "सिंचाई?", btn_pesticide: "कीटनाशक?", btn_tractor: "ट्रैक्टर खोजें",
+                btn_rice_fert: "धान खाद?", btn_kisan_status: "किसान स्थिति?", btn_forecast_5: "5-दिन का पूर्वानुमान", btn_organic_pest: "जैविक नियंत्रण",
+                chat_placeholder: "कोई प्रश्न पूछें...", btn_send: "भेजें",
                 community_title: "कृषि-सर्कल (समुदाय साझाकरण)", community_subtitle: "ट्रैक्टर किराए पर लें, मजदूर खोजें, या आस-पास के किसानों के साथ संसाधन साझा करें।",
                 comm_tractors: "🚜 ट्रैक्टर", comm_labour: "👨‍🌾 मजदूर", comm_pumps: "🚰 पंप", comm_storage: "❄️ कोल्ड स्टोरेज", comm_vendors: "🏪 विक्रेता", comm_fertilizers: "🌱 उर्वरक",
                 comm_owner: "मालिक:", comm_dist: "दूरी:", comm_info: "जानकारी:", comm_book: "बुक करें", comm_call: "📞 कॉल करें",
-                market_title: "लाइव मंडी भाव", market_mandi: "मंडी", market_subtitle: "आपकी स्थानीय मंडी में फसलों के ताज़ा दाम।", crop_wheat: "गेहूं", crop_onion: "प्याज", crop_tomato: "टमाटर", price_quintal: "प्रति क्विंटल",
+                comm_markets: "🏬 बाजार",
+                market_title: "लाइव मंडी भाव", market_mandi: "मंडी", market_subtitle: "आपकी स्थानीय मंडी में फसलों के ताज़ा दाम।", 
+                crop_wheat: "गेहूं", crop_onion: "प्याज", crop_tomato: "टमाटर", crop_soybean: "सोयाबीन", crop_cotton: "कपास", crop_sugarcane: "गन्ना",
+                crop_rice: "धान (चावल)", crop_maize: "मक्का", crop_groundnut: "मूंगफली", crop_mustard: "सरसों",
+                price_quintal: "प्रति क्विंटल", price_ton: "प्रति टन",
+                log_title: "मेरी फार्म लॉगबुक", log_total_invest: "कुल निवेश:", log_add_task: "नया कार्य जोड़ें", log_cat_sowing: "🌱 बुवाई", log_cat_fert: "🌿 उर्वरक", log_cat_pest: "🛡️ कीटनाशक", log_cat_labor: "👨‍🌾 मजदूर", log_cat_irrigation: "💧 सिंचाई", log_cat_harvest: "🌾 कटाई", log_cost_ph: "लागत (₹)", log_note_ph: "नोट (वैकल्पिक)", btn_save_log: "कार्य सहेजें", log_history: "हाल की गतिविधि", log_empty: "अभी तक कोई कार्य लॉग नहीं किया गया।", btn_download: "📥 एक्सेल डाउनलोड करें",
                 crop_title: "फसल स्वास्थ्य स्कैनर", crop_subtitle: "बीमार पौधे की फोटो अपलोड करें, और AI तुरंत निदान करेगा।", btn_upload: "फोटो अपलोड करने के लिए टैप करें",
-                crop_res_title: "⚠ लीफ ब्लाइट का पता चला", crop_res_conf: "आत्मविश्वास:", crop_res_treat: "उपचार:", crop_res_treat_val: "शाम को कॉपर फफूंदनाशक (2g/Liter) लगाएं।",
-                pest_title: "कीट भविष्यवाणी", pest_whitefly: "सफेद मक्खी का जोखिम", pest_factors: "जोखिम बढ़ाने वाले मौसम कारक:", pest_hum: "उच्च आर्द्रता (65%)", pest_temp: "गर्म तापमान (32°C)", pest_btn: "निवारक कार्रवाई देखें",
+                crop_res_title: "⚠ लीफ ब्लाइट का पता चला", crop_res_conf: "सटीकता:", crop_res_treat: "उपचार:", crop_res_treat_val: "शाम को कॉपर फफूंदनाशक (2g/Liter) लगाएं।",
+                pest_title: "कीट भविष्यवाणी", pest_factors: "जोखिम बढ़ाने वाले मौसम कारक:", pest_btn: "निवारक कार्रवाई देखें",
+                pest_whitefly: "सफेद मक्खी का जोखिम", pest_aphid: "एफिड और थ्रिप्स जोखिम", pest_low_risk: "सामान्य कीट जोखिम", 
+                measure_whitefly: "उचित दूरी बनाए रखें। गंभीर होने पर इमिडाक्लोप्रिड का छिड़काव करें। पीले चिपचिपे जाल लगाएं।", measure_aphid: "5% नीम बीज अर्क (NSKE) का छिड़काव करें। अधिक नाइट्रोजन से बचें।", measure_low_risk: "खेत की स्वच्छता बनाए रखें। नियमित निगरानी पर्याप्त है।",
+                factor_hum_high: "उच्च आर्द्रता", factor_temp_warm: "गर्म तापमान", factor_dry: "सूखी स्थिति", factor_temp_hot: "अत्यधिक गर्मी", factor_opt_hum: "अनुकूल आर्द्रता", factor_opt_temp: "अनुकूल तापमान",
                 schemes_title: "सरकारी योजनाएं", scheme_benefit: "लाभ:", scheme_status: "स्थिति:", scheme_eligible: "पात्र", scheme_apply: "अभी आवेदन करें", scheme_view: "विवरण देखें",
                 sch1_title: "पीएम-किसान सम्मान निधि", sch1_desc: "₹6,000 प्रति वर्ष प्रत्यक्ष आय सहायता", sch2_title: "प्रधानमंत्री फसल बीमा योजना", sch2_desc: "प्राकृतिक विफलता के खिलाफ फसल बीमा", sch3_title: "पीएम कृषि सिंचाई योजना", sch3_desc: "ड्रिप और स्प्रिंकलर सिंचाई के लिए सब्सिडी", sch4_title: "पीएम किसान मानधन योजना", sch4_desc: "60 वर्ष की आयु के बाद ₹3,000 मासिक पेंशन", sch5_title: "मृदा स्वास्थ्य कार्ड योजना", sch5_desc: "फसल-वार उर्वरक सिफारिशें", sch6_title: "पीएम-कुसुम योजना", sch6_desc: "सौर जल पंपों पर सब्सिडी",
                 footer_help: "कृषि हेल्पलाइन:", footer_emg: "आपातकालीन:", footer_offline: "ऑफ़लाइन मोड तैयार। आपका डेटा सुरक्षित रूप से सिंक किया गया है।",
-                
                 c_t_title: "महिंद्रा 575 DI", c_t_own: "रमेश पाटिल", c_t_dist: "2.5 किमी दूर", c_t_price: "₹800 / घंटा",
                 c_l_title: "कटाई टीम (5 लोग)", c_l_own: "सुरेश कुमार", c_l_dist: "4 किमी दूर", c_l_price: "₹400 / दिन (प्रति व्यक्ति)",
                 c_p_title: "5HP सबमर्सिबल पंप", c_p_own: "विनायक देशमुख", c_p_dist: "1.2 किमी दूर", c_p_price: "₹300 / दिन",
                 c_s_title: "कोल्ड स्टोरेज स्पेस", c_s_own: "एग्रोफ्रेश हब", c_s_dist: "12 किमी दूर", c_s_price: "₹1000 / महीना",
                 c_v_title: "किसान कृषि केंद्र", c_v_own: "अनिल शिंदे", c_v_dist: "3.5 किमी दूर", c_v_price: "सभी बीज और उपकरण उपलब्ध",
-                c_f_title: "जैविक यूरिया और NPK", c_f_own: "ग्रीनफार्म सप्लायर्स", c_f_dist: "5 किमी दूर", c_f_price: "₹350 / 50kg बैग"
+                c_f_title: "जैविक यूरिया और NPK", c_f_own: "ग्रीनफार्म सप्लायर्स", c_f_dist: "5 किमी दूर", c_f_price: "₹350 / 50kg बैग",
+                c_m_title: "APMC मुख्य बाजार", c_m_own: "सरकारी मंडी", c_m_dist: "8 किमी दूर", c_m_price: "खुला है सुबह 6 - दोपहर 2 (आज के अच्छे दाम)"
             },
             mr: {
-                logo: "कृषिरक्षक AI", nav_dashboard: "डॅशबोर्ड", nav_ai: "AI सल्लागार", nav_community: "कृषी-सर्कल", nav_market: "बाजार भाव", nav_crop: "पीक आरोग्य", nav_schemes: "योजना",
-                hero_badge: "✨ स्मार्ट शेती सोपी केली", hero_title: "प्रत्येक दिवस महत्त्वाचा आहे", hero_subtitle: "आज शेतात नेमके काय करायचे ते AI तुम्हाला अचूक सांगते.",
+                logo: "कृषिरक्षक", nav_dashboard: "डॅशबोर्ड", nav_ai: "AI सल्लागार", nav_community: "कृषी-सर्कल", nav_market: "बाजार भाव", nav_log: "लॉगबुक", nav_crop: "पीक आरोग्य", nav_schemes: "योजना",
+                hero_badge: "✨ शेतीमध्ये क्रांती", hero_title: "शेतीचे नवीन मापदंड", hero_subtitle: "डेटा-आधारित अंतर्दृष्टी आणि रिअल-टाइम अचूकतेसह शेतीच्या पुढील पिढीचा अनुभव घ्या.",
                 hero_feat_1: "🎯 रिअल-टाइम हवामान आणि धोका सूचना", hero_feat_2: "📸 AI पीक रोग स्कॅनर", hero_feat_3: "📊 थेट बाजार भाव",
-                btn_get_started: "सुरू करा", btn_ask_ai: "AI ला विचारा",
-                greeting: "शुभ प्रभात, शेतकरी 🌾", loc_placeholder: "शहर/गाव प्रविष्ट करा",
-                action_title: "आजचा कृती आराखडा", action_1: "सकाळी 6 वाजता पाणी द्या", action_2: "आज कीटकनाशक फवारू नका (पावसाची शक्यता)", action_3: "संध्याकाळपूर्वी टोमॅटो काढा", action_4: "आज अंदाजे 1800 लिटर पाणी वाचवा", est_savings: "अंदाजित बचत:", est_amount: "₹1850",
+                btn_get_started: "सुरू करा", btn_ask_ai: "AI ला विचारा", greeting: "नमस्ते, शेतकरी 🌾", loc_placeholder: "शहर/गाव प्रविष्ट करा",
+                action_title: "आजचा कृती आराखडा", est_savings: "अंदाजित बचत:",
                 weather_title: "आजचे हवामान", weather_loc: "स्थान:", weather_temp: "तापमान:", weather_rain: "पावसाची शक्यता:", weather_wind: "वारा:",
                 risk_title: "धोका सूचना", risk_based_on: "आधारित:", risk_data: "डेटा", risk_flood: "पूर / पावसाचा धोका", risk_heat: "उष्णतेचा धोका", risk_pest: "कीटकांचा धोका", risk_low: "कमी", risk_medium: "मध्यम", risk_high: "जास्त ⚠",
-                ai_title: "AI सल्लागार", ai_subtitle: "मी बोलू शकतो! तुमचा आवाज वाढवा आणि विचारा.", ai_greeting: "नमस्कार! मी कृषिरक्षक AI आहे. आज मी तुमची कशी मदत करू शकतो?",
-                btn_irrigate: "पाणी देऊ?", btn_pesticide: "कीटकनाशक?", btn_tractor: "ट्रॅक्टर शोधा", chat_placeholder: "प्रश्न विचारा...", btn_send: "पाठवा",
+                ai_title: "AI सल्लागार", ai_subtitle: "मी बोलू शकतो! तुमचा आवाज वाढवा आणि विचारा.", ai_greeting: "नमस्कार! मी कृषिरक्षक आहे. आज मी तुमची कशी मदत करू शकतो?",
+                btn_irrigate: "पाणी देऊ?", btn_pesticide: "कीटकनाशक?", btn_tractor: "ट्रॅक्टर शोधा",
+                btn_rice_fert: "भात खत?", btn_kisan_status: "शेतकरी पात्रता?", btn_forecast_5: "५-दिवसांचा अंदाज", btn_organic_pest: "सेंद्रिय नियंत्रण",
+                chat_placeholder: "प्रश्न विचारा...", btn_send: "पाठवा",
                 community_title: "कृषी-सर्कल (समुदाय सामायिकरण)", community_subtitle: "ट्रॅक्टर भाड्याने घ्या, मजूर शोधा किंवा जवळच्या शेतकऱ्यांसोबत संसाधने सामायिक करा.",
                 comm_tractors: "🚜 ट्रॅक्टर", comm_labour: "👨‍🌾 मजूर", comm_pumps: "🚰 पंप", comm_storage: "❄️ कोल्ड स्टोरेज", comm_vendors: "🏪 विक्रेते", comm_fertilizers: "🌱 खते",
                 comm_owner: "मालक:", comm_dist: "अंतर:", comm_info: "माहिती:", comm_book: "बुक करा", comm_call: "📞 कॉल करा",
-                market_title: "थेट बाजार भाव (मंडी)", market_mandi: "मंडी", market_subtitle: "तुमच्या स्थानिक बाजारातील पिकांचे रोजचे दर.", crop_wheat: "गहू", crop_onion: "कांदा", crop_tomato: "टोमॅटो", price_quintal: "प्रति क्विंटल",
+                comm_markets: "🏬 बाजार",
+                market_title: "थेट बाजार भाव (मंडी)", market_mandi: "मंडी", market_subtitle: "तुमच्या स्थानिक बाजारातील पिकांचे रोजचे दर.", 
+                crop_wheat: "गहू", crop_onion: "कांदा", crop_tomato: "टोमॅटो", crop_soybean: "सोयाबीन", crop_cotton: "कापूस", crop_sugarcane: "ऊस",
+                crop_rice: "भात (धान)", crop_maize: "मका", crop_groundnut: "भूईमूग", crop_mustard: "मोहरी",
+                price_quintal: "प्रति क्विंटल", price_ton: "प्रति टन",
+                log_title: "माझी शेती लॉगबुक", log_total_invest: "एकूण गुंतवणूक:", log_add_task: "नवीन कार्य जोडा", log_cat_sowing: "🌱 पेरणी", log_cat_fert: "🌿 खत", log_cat_pest: "🛡️ कीटकनाशक", log_cat_labor: "👨‍🌾 मजूर", log_cat_irrigation: "💧 सिंचन", log_cat_harvest: "🌾 कापणी", log_cost_ph: "खर्च (₹)", log_note_ph: "नोंद (ऐच्छिक)", btn_save_log: "कार्य जतन करा", log_history: "अलीकडील क्रियाकलाप", log_empty: "अद्याप कोणतेही कार्य लॉग केलेले नाही.", btn_download: "📥 एक्सेल डाउनलोड करा",
                 crop_title: "पीक आरोग्य स्कॅनर", crop_subtitle: "आजारी रोपाचा फोटो अपलोड करा आणि AI त्वरित निदान करेल.", btn_upload: "फोटो अपलोड करण्यासाठी टॅप करा",
-                crop_res_title: "⚠ लीफ ब्लाइट आढळले", crop_res_conf: "खात्री:", crop_res_treat: "उपचार:", crop_res_treat_val: "संध्याकाळी कॉपर बुरशीनाशक (2g/Liter) लावा.",
-                pest_title: "कीटक अंदाज", pest_whitefly: "पांढरी माशी धोका", pest_factors: "धोका वाढवणारे हवामान घटक:", pest_hum: "उच्च आर्द्रता (65%)", pest_temp: "उबदार तापमान (32°C)", pest_btn: "प्रतिबंधक कृती पहा",
+                crop_res_title: "⚠ लीफ ब्लाइट आढळले", crop_res_conf: "खात्री:", crop_res_treat: "उपचार:", crop_res_treat_val: "संध्याकाळी कॉपर बुरशीनाशक (2g/Liter) ठेवा.",
+                pest_title: "कीटक अंदाज", pest_factors: "धोका वाढवणारे हवामान घटक:", pest_btn: "प्रतिबंधक कृती पहा",
+                pest_whitefly: "पांढरी माशी धोका", pest_aphid: "मावा आणि तुडतुडे धोका", pest_low_risk: "सामान्य कीटक धोका", 
+                measure_whitefly: "योग्य अंतर ठेवा. प्रादुर्भाव जास्त असल्यास इमिडाक्लोप्रिड फवारा. पिवळे चिकट सापळे लावा.", measure_aphid: "५% निंबोळी अर्काची (NSKE) फवारणी करा. जास्त नत्र वापर टाळा.", measure_low_risk: "शेतात स्वच्छता ठेवा. नियमित पाहणी पुरेशी आहे.",
+                factor_hum_high: "उच्च आर्द्रता", factor_temp_warm: "उबदार तापमान", factor_dry: "कोरडे हवामान", factor_temp_hot: "अत्यधिक उष्णता", factor_opt_hum: "अनुकूल आर्द्रता", factor_opt_temp: "अनुकूल तापमान",
                 schemes_title: "सरकारी योजना", scheme_benefit: "फायदा:", scheme_status: "स्थिती:", scheme_eligible: "पात्र", scheme_apply: "आता अर्ज करा", scheme_view: "तपशील पहा",
                 sch1_title: "पीएम-किसान सन्मान निधी", sch1_desc: "₹6,000 प्रति वर्ष थेट उत्पन्न समर्थन", sch2_title: "प्रधानमंत्री पीक विमा योजना", sch2_desc: "नैसर्गिक अपयशाविरुद्ध पीक विमा", sch3_title: "पीएम कृषी सिंचन योजना", sch3_desc: "ठिबक आणि तुषार सिंचनासाठी अनुदान", sch4_title: "पीएम किसान मानधन योजना", sch4_desc: "वयाच्या 60 नंतर ₹3,000 मासिक पेन्शन", sch5_title: "मृदा आरोग्य कार्ड योजना", sch5_desc: "पीकनिहाय खत शिफारसी", sch6_title: "पीएम-कुसुम योजना", sch6_desc: "सौर पाण्याचे पंप अनुदान",
                 footer_help: "कृषी हेल्पलाइन:", footer_emg: "आणीबाणी:", footer_offline: "ऑफलाइन मोड तयार. तुमचा डेटा सुरक्षितपणे सिंक केला आहे.",
-
                 c_t_title: "महिंद्रा 575 DI", c_t_own: "रमेश पाटील", c_t_dist: "2.5 किमी दूर", c_t_price: "₹800 / तास",
                 c_l_title: "कापणी कामगार (5 लोक)", c_l_own: "सुरेश कुमार", c_l_dist: "4 किमी दूर", c_l_price: "₹400 / दिवस (प्रति व्यक्ती)",
                 c_p_title: "5HP सबमर्सिबल पंप", c_p_own: "विनायक देशमुख", c_p_dist: "1.2 किमी दूर", c_p_price: "₹300 / दिवस",
                 c_s_title: "कोल्ड स्टोरेज जागा", c_s_own: "अॅग्रोफ्रेश हब", c_s_dist: "12 किमी दूर", c_s_price: "₹1000 / महिना",
                 c_v_title: "किसान कृषी केंद्र", c_v_own: "अनिल शिंदे", c_v_dist: "3.5 किमी दूर", c_v_price: "सर्व बियाणे आणि साधने उपलब्ध",
-                c_f_title: "सेंद्रिय युरिया आणि NPK", c_f_own: "ग्रीनफार्म सप्लायर्स", c_f_dist: "5 किमी दूर", c_f_price: "₹350 / 50kg पिशवी"
+                c_f_title: "सेंद्रिय युरिया आणि NPK", c_f_own: "ग्रीनफार्म सप्लायर्स", c_f_dist: "5 किमी दूर", c_f_price: "₹350 / 50kg पिशवी",
+                c_m_title: "APMC मुख्य बाजार", c_m_own: "सरकारी मंडी", c_m_dist: "8 किमी दूर", c_m_price: "सकाळी 6 - दुपारी 2 खुला (आजचे चांगले दर)"
             }
         };
 
@@ -618,16 +814,22 @@
                 pest: "Due to the current warm temperature and humidity, the pest risk is elevated. Use the Crop Health Scanner if you spot sick leaves.",
                 tractor: "Checking AgriCircle... Ramesh Patil has a Mahindra tractor available just 2.5 km away.",
                 scheme: "You are currently eligible for the PM-Kisan scheme, which provides 6,000 rupees per year.",
-                weather: "The current weather shows a chance of rain. Check the Dashboard for exact details for your village."
+                weather: "The current weather shows a chance of rain. Check the Dashboard for exact details for your village.",
+                rice_fert: "For Paddy fields, a balanced application of NPK (120:60:40 kg/ha) is optimal. Apply Nitrogen in split doses for maximum yield.",
+                organic_pest: "You can spray 5% Neem Seed Kernel Extract (NSKE) or a mixture of dashparni ark to handle initial sucking pests organically.",
+                forecast_5: "The 5-day forecast indicates steady temperatures with intermittent convective showers starting late tomorrow evening."
             },
             hi: {
                 default: "मैं आपका आभासी कृषि सहायक हूँ! आप मुझसे मौसम, फसल स्वास्थ्य, या योजनाओं के बारे में पूछ सकते हैं।",
                 irrigate: "हाँ, मिट्टी की नमी 45% है। आज सुबह 6 बजे सिंचाई करने की सलाह दी जाती है।",
                 pesticide: "नहीं, मौसम के अनुसार आज बारिश की अधिक संभावना है। अभी कीटनाशक छिड़कने से यह धुल जाएगा।",
-                pest: "गर्म तापमान और नमी के कारण, कीट का खतरा अधिक है। स्कैनर का उपयोग करें।",
+                pest: "गर्म तापमान और नमी के कारण, कीड़ों का खतरा अधिक है। स्कैनर का उपयोग करें।",
                 tractor: "रमेश पाटिल का ट्रैक्टर 2.5 किमी दूर उपलब्ध है।",
                 scheme: "आप वर्तमान में पीएम-किसान योजना के लिए पात्र हैं, जो प्रति वर्ष 6,000 रुपये प्रदान करती है।",
-                weather: "वर्तमान मौसम में बारिश की संभावना है। सटीक जानकारी के लिए डैशबोर्ड देखें।"
+                weather: "वर्तमान मौसम में बारिश की संभावना है। सटीक जानकारी के लिए डैशबोर्ड देखें।",
+                rice_fert: "धान के लिए एनपीके (120:60:40) का प्रयोग करें। नाइट्रोजन को तीन विभाजित खुराकों में दें।",
+                organic_pest: "शुरुआती कीटों के जैविक नियंत्रण के लिए 5% नीम बीज अर्क (NSKE) का छिड़काव करें।",
+                forecast_5: "5-दिन का पूर्वानुमान: कल शाम से हल्की से मध्यम वर्षा होने की संभावना है।"
             },
             mr: {
                 default: "मी तुमचा आभासी कृषी सहाय्यक आहे! तुम्ही मला हवामान, पीक आरोग्य किंवा योजनांबद्दल विचारू शकता.",
@@ -636,52 +838,47 @@
                 pest: "उबदार तापमान आणि आर्द्रतेमुळे कीटकांचा धोका जास्त आहे.",
                 tractor: "रमेश पाटील यांचा ट्रॅक्टर 2.5 किमी अंतरावर उपलब्ध आहे.",
                 scheme: "तुम्ही सध्या पीएम-किसान योजनेसाठी पात्र आहात, जी दरवर्षी 6,000 रुपये देते.",
-                weather: "सध्याच्या हवामानात पावसाची शक्यता आहे. अचूक माहितीसाठी डॅशबोर्ड तपासा."
+                weather: "सध्याच्या हवामानात पावसाची शक्यता आहे. अचूक माहितीसाठी डॅशबोर्ड तपासा.",
+                rice_fert: "भातासाठी एनपीके (१२०:६०:४०) वापरा. नत्र खताचे हप्ते विभागून द्या.",
+                organic_pest: "सेंद्रिय पद्धतीने कीड नियंत्रणासाठी ५% निंबोळी अर्काची फवारणी करा.",
+                forecast_5: "पुढील ५ दिवसांचा अंदाज: उद्या संध्याकाळपासून हलक्या पावसाची शक्यता वर्तवण्यात आली आहे."
             }
         };
 
         function changeLanguage(lang) {
             currentLang = lang;
-            
-            // 1. Translate innerText nodes
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    el.innerText = translations[lang][key];
-                }
+                if (translations[lang][key]) el.innerText = translations[lang][key];
             });
-            
-            // 2. Translate Input Placeholders
             const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
             placeholders.forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
-                if (translations[lang][key]) {
-                    el.placeholder = translations[lang][key];
-                }
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
             });
-            
-            // 3. Update active dynamic content logic (Risks, Community Cards)
-            fetchWeatherAndLocationData(); // Re-apply risks in new language
-            
+            fetchWeatherAndLocationData(); 
             const activeBtn = document.querySelector('.comm-btn.btn-primary');
-            if(activeBtn) {
-                filterCommunity(activeBtn.getAttribute('data-type'), activeBtn); // Re-render card
+            if(activeBtn) filterCommunity(activeBtn.getAttribute('data-type'), activeBtn); 
+            renderLogs(); 
+            
+            const measuresDiv = document.getElementById('pest-measures-display');
+            if(measuresDiv && measuresDiv.style.display === 'block') {
+                showPestPreventiveMeasures();
             }
         }
 
         function toggleTheme() {
             const body = document.body;
-            if (body.getAttribute("data-theme") === "dark") {
-                body.removeAttribute("data-theme");
-            } else {
-                body.setAttribute("data-theme", "dark");
-            }
+            if (body.getAttribute("data-theme") === "dark") body.removeAttribute("data-theme");
+            else body.setAttribute("data-theme", "dark");
         }
 
-        // --- GLOBAL LOCATION LOGIC ---
+        // --- DYNAMICALLY ALIGN TODAY'S ACTION PLAN AND PEST PREDICTION ---
+        let currentLat = 16.7050; 
+        let currentLng = 74.2433;
         let currentLocation = "Kolhapur";
-        let appMap, appMarker;
+        let appMap, userMarker, itemMarker;
 
         function updateGlobalLocation(newLoc) {
             if(!newLoc.trim()) return;
@@ -691,28 +888,33 @@
 
         async function fetchWeatherAndLocationData() {
             try {
-                // 1. Geocode Location
+                document.getElementById('loc-display').innerText = "Loading...";
+                document.getElementById('risk-loc-display').innerText = "Loading...";
+                document.getElementById('market-loc-display').innerText = "...";
+                
                 const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${currentLocation}&count=1`);
                 const geoData = await geoRes.json();
-                
                 if(!geoData.results) {
-                    alert("Location not found. Please check spelling.");
+                    alert("Location not found.");
                     return;
                 }
                 
                 const { latitude, longitude, name } = geoData.results[0];
+                currentLat = latitude;
+                currentLng = longitude;
                 
                 document.getElementById('loc-display').innerText = name;
                 document.getElementById('risk-loc-display').innerText = name;
                 document.getElementById('market-loc-display').innerText = name;
 
-                // 2. Update Map Position Instantly
-                if(appMap && appMarker) {
+                if(appMap) {
                     appMap.setView([latitude, longitude], 13);
-                    appMarker.setLatLng([latitude, longitude]);
+                    if(!userMarker) userMarker = L.marker([latitude, longitude]).addTo(appMap);
+                    else userMarker.setLatLng([latitude, longitude]);
+                    const activeBtn = document.querySelector('.comm-btn.btn-primary');
+                    if(activeBtn) filterCommunity(activeBtn.getAttribute('data-type'), activeBtn);
                 }
                 
-                // 3. Fetch Weather Data
                 const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=precipitation_probability`);
                 const weatherData = await weatherRes.json();
                 
@@ -724,92 +926,226 @@
                 document.getElementById('wind-display').innerText = wind;
                 document.getElementById('rain-display').innerText = rainChance;
 
-                // Grab translated risk words
+                // --- ACTION PLAN LOGIC ---
+                const actionList = document.getElementById('dynamic-action-list');
+                let actionsHTML = '';
+                if (rainChance > 40) {
+                    actionsHTML += `<li>❌ Do not spray pesticide in ${name} today (Rain chance is ${rainChance}%)</li>`;
+                    actionsHTML += `<li>⚠️ Clear drainage channels across fields immediately</li>`;
+                } else {
+                    actionsHTML += `<li>✅ Weather safe for pesticide / fertilizer spray operations</li>`;
+                }
+                if (temp > 32) {
+                    actionsHTML += `<li>💧 High temperature (${temp}°C) detected: Irrigate early at 5:30 AM to cut evaporative loss</li>`;
+                } else {
+                    actionsHTML += `<li>✅ Standard morning drip cycles optimal today</li>`;
+                }
+                actionsHTML += `<li>🌾 Log daily investments in your logbook to keep data verified</li>`;
+                actionList.innerHTML = actionsHTML;
+
+                // --- PEST PREDICTION LOGIC ---
+                const pestNameEl = document.getElementById('pest-name');
+                const factor1El = document.getElementById('pest-factor-1');
+                const factor2El = document.getElementById('pest-factor-2');
+                const mainPestBadge = document.getElementById('main-pest-badge');
+
+                let pestKey, f1Key, f2Key, riskBadgeClass, riskBadgeKey;
+
+                if (temp >= 30 && rainChance < 40) {
+                    pestKey = 'pest_aphid'; f1Key = 'factor_dry'; f2Key = 'factor_temp_hot';
+                    riskBadgeClass = 'badge badge-orange'; riskBadgeKey = 'risk_medium';
+                } else if (temp >= 25 && rainChance >= 40) {
+                    pestKey = 'pest_whitefly'; f1Key = 'factor_hum_high'; f2Key = 'factor_temp_warm';
+                    riskBadgeClass = 'badge'; riskBadgeKey = 'risk_high';
+                } else {
+                    pestKey = 'pest_low_risk'; f1Key = 'factor_opt_hum'; f2Key = 'factor_opt_temp';
+                    riskBadgeClass = 'badge badge-green'; riskBadgeKey = 'risk_low';
+                }
+
+                currentPestKey = pestKey;
+                const measuresDiv = document.getElementById('pest-measures-display');
+                if(measuresDiv) measuresDiv.style.display = 'none';
+
+                pestNameEl.setAttribute('data-i18n', pestKey);
+                pestNameEl.innerText = translations[currentLang][pestKey];
+
+                factor1El.setAttribute('data-i18n', f1Key);
+                factor1El.innerText = translations[currentLang][f1Key] + ` (${rainChance >= 40 ? '65%+' : rainChance + '%'})`;
+
+                factor2El.setAttribute('data-i18n', f2Key);
+                factor2El.innerText = translations[currentLang][f2Key] + ` (${temp}°C)`;
+
+                mainPestBadge.className = riskBadgeClass;
+                mainPestBadge.setAttribute('data-i18n', riskBadgeKey);
+                mainPestBadge.innerText = translations[currentLang][riskBadgeKey];
+
+                // --- RISK BADGES LOGIC ---
                 const riskHigh = translations[currentLang]['risk_high'];
                 const riskMed = translations[currentLang]['risk_medium'];
                 const riskLow = translations[currentLang]['risk_low'];
 
-                // 4. Update Risks
                 let heatBadge = document.getElementById('risk-heat');
-                if (temp >= 35) {
-                    heatBadge.className = "badge"; heatBadge.innerText = riskHigh;
-                } else if (temp >= 30) {
-                    heatBadge.className = "badge badge-orange"; heatBadge.innerText = riskMed;
-                } else {
-                    heatBadge.className = "badge badge-green"; heatBadge.innerText = riskLow;
-                }
+                if (temp >= 35) { heatBadge.className = "badge"; heatBadge.innerText = riskHigh; } 
+                else if (temp >= 30) { heatBadge.className = "badge badge-orange"; heatBadge.innerText = riskMed; } 
+                else { heatBadge.className = "badge badge-green"; heatBadge.innerText = riskLow; }
 
                 let floodBadge = document.getElementById('risk-flood');
-                if (rainChance >= 80) {
-                    floodBadge.className = "badge"; floodBadge.innerText = riskHigh;
-                } else if (rainChance >= 50) {
-                    floodBadge.className = "badge badge-orange"; floodBadge.innerText = riskMed;
-                } else {
-                    floodBadge.className = "badge badge-green"; floodBadge.innerText = riskLow;
-                }
+                if (rainChance >= 80) { floodBadge.className = "badge"; floodBadge.innerText = riskHigh; } 
+                else if (rainChance >= 50) { floodBadge.className = "badge badge-orange"; floodBadge.innerText = riskMed; } 
+                else { floodBadge.className = "badge badge-green"; floodBadge.innerText = riskLow; }
 
-                let pestBadge = document.getElementById('risk-pest');
-                if (temp >= 25 && rainChance >= 40) {
-                    pestBadge.className = "badge"; pestBadge.innerText = riskHigh;
-                } else if (temp >= 20 && rainChance >= 20) {
-                    pestBadge.className = "badge badge-orange"; pestBadge.innerText = riskMed;
-                } else {
-                    pestBadge.className = "badge badge-green"; pestBadge.innerText = riskLow;
-                }
+                let riskPestList = document.getElementById('risk-pest');
+                if (temp >= 25 && rainChance >= 40) { riskPestList.className = "badge"; riskPestList.innerText = riskHigh; } 
+                else if (temp >= 20 && rainChance >= 20) { riskPestList.className = "badge badge-orange"; riskPestList.innerText = riskMed; } 
+                else { riskPestList.className = "badge badge-green"; riskPestList.innerText = riskLow; }
                 
             } catch (error) {
-                console.error("Weather error:", error);
+                console.error("Weather sync failed:", error);
             }
         }
+        
+        // --- Show Preventive Measures Logic ---
+        function showPestPreventiveMeasures() {
+            const measuresDiv = document.getElementById('pest-measures-display');
+            if(!measuresDiv) return;
+            
+            let measureKey = 'measure_low_risk';
+            if (currentPestKey === 'pest_whitefly') measureKey = 'measure_whitefly';
+            else if (currentPestKey === 'pest_aphid') measureKey = 'measure_aphid';
+            
+            measuresDiv.innerText = translations[currentLang][measureKey];
+            measuresDiv.style.display = 'block';
+        }
 
-        // --- Community Filters ---
+        // --- Community Sharing Data Engine ---
+        const communityData = [
+            { type: 'tractor', icon: '🚜', titleKey: 'c_t_title', ownKey: 'c_t_own', distKey: 'c_t_dist', priceKey: 'c_t_price' },
+            { type: 'labour', icon: '👨‍🌾', titleKey: 'c_l_title', ownKey: 'c_l_own', distKey: 'c_l_dist', priceKey: 'c_l_price' },
+            { type: 'pump', icon: '🚰', titleKey: 'c_p_title', ownKey: 'c_p_own', distKey: 'c_p_dist', priceKey: 'c_p_price' },
+            { type: 'storage', icon: '❄️', titleKey: 'c_s_title', ownKey: 'c_s_own', distKey: 'c_s_dist', priceKey: 'c_s_price' },
+            { type: 'vendor', icon: '🏪', titleKey: 'c_v_title', ownKey: 'c_v_own', distKey: 'c_v_dist', priceKey: 'c_v_price' },
+            { type: 'fertilizer', icon: '🌱', titleKey: 'c_f_title', ownKey: 'c_f_own', distKey: 'c_f_dist', priceKey: 'c_f_price' },
+            { type: 'market', icon: '🏬', titleKey: 'c_m_title', ownKey: 'c_m_own', distKey: 'c_m_dist', priceKey: 'c_m_price' }
+        ];
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
         function filterCommunity(type, btnElement) {
             const container = document.getElementById('community-card-container');
-            const dStr = translations[currentLang];
-            
-            // Map types to translation keys
-            let icon, titleKey, ownKey, distKey, priceKey;
-            if(type==='tractor'){ icon='🚜'; titleKey='c_t_title'; ownKey='c_t_own'; distKey='c_t_dist'; priceKey='c_t_price'; }
-            if(type==='labour'){ icon='👨‍🌾'; titleKey='c_l_title'; ownKey='c_l_own'; distKey='c_l_dist'; priceKey='c_l_price'; }
-            if(type==='pump'){ icon='🚰'; titleKey='c_p_title'; ownKey='c_p_own'; distKey='c_p_dist'; priceKey='c_p_price'; }
-            if(type==='storage'){ icon='❄️'; titleKey='c_s_title'; ownKey='c_s_own'; distKey='c_s_dist'; priceKey='c_s_price'; }
-            if(type==='vendor'){ icon='🏪'; titleKey='c_v_title'; ownKey='c_v_own'; distKey='c_v_dist'; priceKey='c_v_price'; }
-            if(type==='fertilizer'){ icon='🌱'; titleKey='c_f_title'; ownKey='c_f_own'; distKey='c_f_dist'; priceKey='c_f_price'; }
+            const item = communityData.find(d => d.type === type);
+            if(!item) return;
 
+            const dStr = translations[currentLang];
             if (btnElement) {
                 const buttons = document.querySelectorAll('.comm-btn');
-                buttons.forEach(btn => {
-                    btn.classList.remove('btn-primary');
-                    btn.classList.add('btn-outline');
-                });
-                btnElement.classList.remove('btn-outline');
-                btnElement.classList.add('btn-primary');
+                buttons.forEach(btn => { btn.classList.remove('btn-primary'); btn.classList.add('btn-outline'); });
+                btnElement.classList.remove('btn-outline'); btnElement.classList.add('btn-primary');
             }
 
             container.innerHTML = `
                 <div class="card" style="height: 100%;">
-                    <div style="font-size: 4rem; text-align: center;">${icon}</div>
-                    <h3 style="text-align: center;">${dStr[titleKey]}</h3>
-                    <p><strong>${dStr['comm_owner']}</strong> ${dStr[ownKey]}</p>
-                    <p><strong>${dStr['comm_dist']}</strong> ${dStr[distKey]}</p>
-                    <p><strong>${dStr['comm_info']}</strong> ${dStr[priceKey]}</p>
+                    <div style="font-size: 4rem; text-align: center;">${item.icon}</div>
+                    <h3 style="text-align: center;">${dStr[item.titleKey]}</h3>
+                    <p><strong>${dStr['comm_owner']}</strong> ${dStr[item.ownKey]}</p>
+                    <p><strong>${dStr['comm_dist']}</strong> ${dStr[item.distKey]}</p>
+                    <p><strong>${dStr['comm_info']}</strong> ${dStr[item.priceKey]}</p>
                     <div class="mt-2 flex-between">
-                        <button class="btn btn-primary" style="padding: 10px;">${dStr['comm_book']}</button>
-                        <button class="btn btn-accent" style="padding: 10px;">${dStr['comm_call']}</button>
+                        <button class="btn btn-primary" style="padding: 10px 20px;" onclick="showToast('Booking Request Sent to ${dStr[item.ownKey]}!')">${dStr['comm_book']}</button>
+                        <button class="btn btn-accent" style="padding: 10px 20px;" onclick="window.location.href='tel:9130314018'">${dStr['comm_call']}</button>
                     </div>
                 </div>
             `;
 
-            if(appMarker) {
-                appMarker.setPopupContent(`<b>${dStr[ownKey]}</b><br>${dStr[titleKey]}`);
-                appMarker.openPopup();
+            if(appMap) {
+                let offsetLat = (type.length % 5) * 0.005;
+                let offsetLng = (type.charCodeAt(0) % 5) * 0.005;
+                if (type.length % 2 === 0) offsetLat *= -1;
+                const itemLat = currentLat + offsetLat;
+                const itemLng = currentLng + offsetLng;
+
+                const customIcon = L.divIcon({
+                    html: `<div class="custom-map-icon">${item.icon}</div>`,
+                    className: '', iconSize: [40, 40], iconAnchor: [20, 20], popupAnchor: [0, -20]
+                });
+
+                if(!itemMarker) itemMarker = L.marker([itemLat, itemLng], {icon: customIcon}).addTo(appMap);
+                else { itemMarker.setLatLng([itemLat, itemLng]); itemMarker.setIcon(customIcon); }
+                appMap.setView([currentLat, currentLng], 13);
+                itemMarker.setPopupContent(`<b>${dStr[item.ownKey]}</b><br>${dStr[item.titleKey]}<br>📍 ${dStr[item.distKey]}`);
+                itemMarker.openPopup();
             }
         }
 
-        // --- AI Chat ---
+        // --- Logbook Sync Engine ---
+        function saveLog() {
+            const catSelect = document.getElementById('log-category');
+            const cost = parseFloat(document.getElementById('log-cost').value) || 0;
+            const note = document.getElementById('log-note').value;
+            const date = new Date().toLocaleDateString();
+
+            if (cost <= 0 && note.trim() === "") return;
+
+            farmLogs.unshift({ date, catVal: catSelect.value, cost, note }); 
+            localStorage.setItem('krishi_farm_logs', JSON.stringify(farmLogs));
+            document.getElementById('log-cost').value = '';
+            document.getElementById('log-note').value = '';
+            renderLogs();
+        }
+
+        function renderLogs() {
+            const list = document.getElementById('log-history-list');
+            list.innerHTML = '';
+            let total = 0;
+            const currentLangDict = translations[currentLang];
+
+            if(farmLogs.length === 0) {
+                list.innerHTML = `<li style="text-align:center; color: var(--text-muted); padding: 20px;">${currentLangDict['log_empty']}</li>`;
+                document.getElementById('log-total-cost').innerText = "0";
+                return;
+            }
+
+            farmLogs.forEach((log) => {
+                total += log.cost;
+                let transCat = log.catVal;
+                if(log.catVal === 'Sowing') transCat = currentLangDict['log_cat_sowing'];
+                if(log.catVal === 'Fertilizer') transCat = currentLangDict['log_cat_fert'];
+                if(log.catVal === 'Pesticide') transCat = currentLangDict['log_cat_pest'];
+                if(log.catVal === 'Labor') transCat = currentLangDict['log_cat_labor'];
+                if(log.catVal === 'Irrigation') transCat = currentLangDict['log_cat_irrigation'];
+                if(log.catVal === 'Harvesting') transCat = currentLangDict['log_cat_harvest'];
+
+                let li = document.createElement('li');
+                li.style.padding = "12px 10px"; li.style.borderBottom = "1px solid rgba(0,0,0,0.05)";
+                li.innerHTML = `
+                    <div class="flex-between"><strong>${transCat}</strong><span style="color: var(--error-red); font-weight: bold;">\u20B9${log.cost}</span></div>
+                    <div class="flex-between" style="font-size: 0.9rem; color: var(--text-muted);"><span>\uD83D\uDCC5 ${log.date}</span><span>${log.note}</span></div>
+                `;
+                list.appendChild(li);
+            });
+            document.getElementById('log-total-cost').innerText = total;
+        }
+
+        function downloadExcel() {
+            if(farmLogs.length === 0) return;
+            let csvContent = "data:text/csv;charset=utf-8,Date,Category,Cost (INR),Note\n";
+            farmLogs.forEach(function(log) {
+                let safeNote = log.note ? '"' + log.note.replace(/"/g, '""') + '"' : '""';
+                csvContent += `${log.date},${log.catVal},${log.cost},${safeNote}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri); link.setAttribute("download", "KrishiRakshak_Farm_Logbook.csv");
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        // --- Advisor Framework Engine ---
         function sendMockSuggestion(btnKey) {
-            // Pick appropriate question text from UI translations depending on what button was clicked
-            let text = translations[currentLang][btnKey]; 
+            let text = translations[currentLang][btnKey] || btnKey; 
             document.getElementById('chat-val').value = text;
             sendMsg();
         }
@@ -823,55 +1159,38 @@
             history.innerHTML += `<div class="msg user">${userQ}</div>`;
             input.value = "";
             history.scrollTop = history.scrollHeight;
-
             window.speechSynthesis.cancel(); 
 
             setTimeout(() => {
                 const respDict = aiResponses[currentLang]; 
                 let reply = respDict.default;
-                
                 const q = userQ.toLowerCase();
                 
-                if(q.includes("irrigate") || q.includes("water") || q.includes("सिंचाई") || q.includes("पाणी")) {
-                    reply = respDict.irrigate;
-                } else if(q.includes("pesticide") || q.includes("spray") || q.includes("कीटनाशक") || q.includes("कीटकनाशक") || q.includes("फवारू")) {
-                    reply = respDict.pesticide;
-                } else if(q.includes("pest") || q.includes("disease") || q.includes("health") || q.includes("sick") || q.includes("कीट") || q.includes("बीमार")) {
-                    reply = respDict.pest;
-                } else if(q.includes("tractor") || q.includes("rent") || q.includes("ट्रैक्टर") || q.includes("ट्रॅक्टर") || q.includes("किराये") || q.includes("भाड्याने")) {
-                    reply = respDict.tractor;
-                } else if(q.includes("scheme") || q.includes("government") || q.includes("योजना") || q.includes("सरकारी")) {
-                    reply = respDict.scheme;
-                } else if(q.includes("weather") || q.includes("rain") || q.includes("hot") || q.includes("मौसम") || q.includes("हवामान") || q.includes("बारिश")) {
-                    reply = respDict.weather;
-                }
+                if(q.includes("irrigate") || q.includes("water") || q.includes("सिंचाई") || q.includes("पाणी")) reply = respDict.irrigate;
+                else if(q.includes("pesticide") || q.includes("spray") || q.includes("कीटनाशक") || q.includes("कीटकनाशक")) reply = respDict.pesticide;
+                else if(q.includes("pest") || q.includes("disease") || q.includes("कीट") || q.includes("बीमार")) reply = respDict.pest;
+                else if(q.includes("tractor") || q.includes("rent") || q.includes("ट्रैक्टर") || q.includes("भाड्याने")) reply = respDict.tractor;
+                else if(q.includes("scheme") || q.includes("government") || q.includes("योजना")) reply = respDict.scheme;
+                else if(q.includes("rice") || q.includes("fertilizer") || q.includes("खाद") || q.includes("खत")) reply = respDict.rice_fert;
+                else if(q.includes("organic") || q.includes("control") || q.includes("जैविक") || q.includes("सेंद्रिय")) reply = respDict.organic_pest;
+                else if(q.includes("forecast") || q.includes("5-day") || q.includes("पूर्वानुमान") || q.includes("अंदाज")) reply = respDict.forecast_5;
+                else if(q.includes("weather") || q.includes("rain") || q.includes("मौसम") || q.includes("हवामान")) reply = respDict.weather;
                 
                 history.innerHTML += `<div class="msg ai">${reply}</div>`;
                 history.scrollTop = history.scrollHeight;
-                
                 speak(reply); 
             }, 800);
         }
 
-        window.speechSynthesis.onvoiceschanged = function() {
-            window.speechSynthesis.getVoices();
-        };
-
         function startVoice() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if(!SpeechRecognition) {
-                alert("Voice input not supported in this browser.");
-                return;
-            }
+            if(!SpeechRecognition) return;
             const recognition = new SpeechRecognition();
-            
             recognition.lang = currentLang === 'hi' ? 'hi-IN' : (currentLang === 'mr' ? 'mr-IN' : 'en-IN');
             recognition.start();
             document.getElementById('chat-val').placeholder = "Listening... 🎤";
-            
             recognition.onresult = function(event) {
                 document.getElementById('chat-val').value = event.results[0][0].transcript;
-                document.getElementById('chat-val').placeholder = translations[currentLang]['chat_placeholder'];
                 sendMsg();
             };
         }
@@ -879,44 +1198,31 @@
         function speak(text) {
             const synth = window.speechSynthesis;
             const utterance = new SpeechSynthesisUtterance(text);
-            
-            let targetLang = 'en-IN';
-            if (currentLang === 'hi') targetLang = 'hi-IN';
-            if (currentLang === 'mr') targetLang = 'mr-IN'; 
-            
+            let targetLang = currentLang === 'hi' ? 'hi-IN' : (currentLang === 'mr' ? 'mr-IN' : 'en-IN');
             utterance.lang = targetLang;
-            
-            const voices = synth.getVoices();
-            const voice = voices.find(v => v.lang.includes(targetLang)) || voices.find(v => v.lang.includes(currentLang));
-            if(voice) {
-                utterance.voice = voice;
-            }
-            
-            utterance.pitch = 1.1; 
-            utterance.rate = 0.95; 
-            
             synth.speak(utterance);
         }
 
-        function mockUpload() {
-            document.getElementById('upload-result').style.display = 'block';
-        }
+        function mockUpload() { document.getElementById('upload-result').style.display = 'block'; }
 
-        // Init
+        // Bootstrapping Engine
         window.onload = () => {
             document.getElementById('global-location-input').value = currentLocation;
             
-            appMap = L.map('map').setView([16.7050, 74.2433], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
-            }).addTo(appMap);
-            
-            appMarker = L.marker([16.7050, 74.2433]).addTo(appMap);
-            
-            // Fire initial logic
+            // Re-apply onscroll for new sleek button
+            window.onscroll = function() {
+                const btn = document.getElementById("scrollTopBtn");
+                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                    btn.style.display = "flex";
+                } else {
+                    btn.style.display = "none";
+                }
+            };
+
+            appMap = L.map('map').setView([currentLat, currentLng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(appMap);
+            userMarker = L.marker([currentLat, currentLng]).addTo(appMap);
             changeLanguage('en');
-            fetchWeatherAndLocationData();
-            filterCommunity('tractor', document.querySelector('.comm-btn'));
         };
     </script>
 </body>
