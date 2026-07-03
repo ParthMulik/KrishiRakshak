@@ -18,7 +18,7 @@ Features :
 
 🌐 Multi-Lingual Support: Full platform localization available in English, Hindi (हिन्दी), and Marathi (मराठी).
 
-🛠️ Tech Stack
+Tech Stack
 
 Frontend: HTML5, CSS3, Vanilla JavaScript
 
