@@ -2,7 +2,7 @@
 
 KrishiRakshak is a smart, data-driven web application designed to empower farmers with real-time insights, community sharing, and actionable intelligence. Built with modern web technologies, it bridges the gap between traditional farming and digital precision.
 
-Features
+Features :
 
 🌤️ Real-Time Weather & Risk Alerts: Utilizes the Open-Meteo API to fetch hyper-local weather data and calculates automated risk alerts for floods, heatwaves, and pests.
 
