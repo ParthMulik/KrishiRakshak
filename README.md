@@ -28,7 +28,7 @@ Data APIs: Open-Meteo Geocoding & Weather APIs
 
 Web APIs: Web Speech API (Speech Synthesis & Recognition), LocalStorage API (Persistence)
 
-Project Structure
+Project Structure :
 
 krishirakshak/
 ├── css/
