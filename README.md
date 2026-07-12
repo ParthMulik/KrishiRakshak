@@ -1,6 +1,6 @@
  KrishiRakshak - Farm Decision Intelligence
 
-KrishiRakshak is a smart, data-driven web application designed to empower farmers with real-time insights, community sharing, and actionable intelligence. Built with modern web technologies, it bridges the gap between traditional farming and digital precision.
+KrishiRakshak is a smart, data-driven web application designed to empower farmers with real-time insights, community sharing, and actionable intelligence. Built with modern technologies, it bridges the gap between traditional farming and digital precision.
 
 Features :
 
