@@ -36,7 +36,7 @@ krishirakshak/
 ├── js/
 │   └── main.js         # API fetching, state management, and UI logic
 ├── images/
-│   └── farmer.jpg      # Static image assets
+│   └── farmer.jpg      # Static image 
 ├── index.html          
 └── README.md         
 
