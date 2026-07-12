@@ -38,7 +38,7 @@ krishirakshak/
 ├── images/
 │   └── farmer.jpg      # Static image assets
 ├── index.html          # Main application structure
-└── README.md           # Project documentation
+└── README.md           documentation
 
 
 
