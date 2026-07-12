@@ -34,7 +34,7 @@ krishirakshak/
 ├── css/
 │   └── style.css       # All global styles, variables, and media queries
 ├── js/
-│   └── main.js         # API fetching, state 
+│   └── main.js         # API fetch
 ├── images/
 │   └── farmer.jpg    
 ├── index.html          
